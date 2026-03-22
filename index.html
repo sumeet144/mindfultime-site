@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MindfulTime — Your Digital Wellbeing Assistant</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary:   #456AF7;
+      --secondary: #8C59F5;
+      --accent:    #38CF9E;
+      --warning:   #FFB547;
+      --bg:        #F7F7FC;
+      --card:      #ffffff;
+      --text:      #1a1a2e;
+      --muted:     #6b7280;
+      --radius:    14px;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      padding: 0 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 60px;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+      font-weight: 700; font-size: 18px; color: var(--text);
+      text-decoration: none;
+    }
+    .nav-logo .icon {
+      width: 32px; height: 32px; border-radius: 8px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+    }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a {
+      text-decoration: none; color: var(--muted);
+      font-size: 14px; font-weight: 500; transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 80px 24px 100px;
+      text-align: center;
+      background: linear-gradient(160deg, #eef2ff 0%, #f0fdf4 100%);
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: "";
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 20% 50%, rgba(69,106,247,.08) 0%, transparent 60%),
+                  radial-gradient(ellipse at 80% 20%, rgba(140,89,245,.07) 0%, transparent 60%);
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(69,106,247,.1); color: var(--primary);
+      font-size: 12px; font-weight: 600; letter-spacing: .05em;
+      padding: 6px 14px; border-radius: 100px; margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+    .hero h1 {
+      font-size: clamp(36px, 6vw, 60px);
+      font-weight: 800; line-height: 1.1;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      margin-bottom: 20px;
+    }
+    .hero p {
+      font-size: clamp(16px, 2.5vw, 20px); color: var(--muted);
+      max-width: 560px; margin: 0 auto 36px;
+    }
+    .hero-cta {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: #fff; font-weight: 600; font-size: 16px;
+      padding: 14px 32px; border-radius: 100px; text-decoration: none;
+      box-shadow: 0 8px 30px rgba(69,106,247,.35);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .hero-cta:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(69,106,247,.45); }
+    .hero-sub {
+      margin-top: 16px; font-size: 13px; color: var(--muted);
+    }
+
+    /* ── SECTION COMMON ── */
+    section { padding: 80px 24px; }
+    .section-label {
+      font-size: 12px; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--primary);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: clamp(26px, 4vw, 38px); font-weight: 800;
+      margin-bottom: 16px; line-height: 1.2;
+    }
+    .section-subtitle {
+      font-size: 17px; color: var(--muted); max-width: 520px; margin-bottom: 48px;
+    }
+    .centered { text-align: center; }
+    .centered .section-subtitle { margin-left: auto; margin-right: auto; }
+    .max-w { max-width: 1100px; margin: 0 auto; }
+
+    /* ── FEATURES GRID ── */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .feature-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: 0 2px 12px rgba(0,0,0,.05);
+      border: 1px solid rgba(0,0,0,.04);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .feature-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,.08); }
+    .feature-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; margin-bottom: 16px;
+    }
+    .feature-card h3 { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
+    .feature-card p  { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+    /* ── HOW IT WORKS ── */
+    .how-bg { background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%); color: white; }
+    .how-bg .section-label { color: #a5b4fc; }
+    .how-bg .section-title { color: white; }
+    .how-bg .section-subtitle { color: rgba(255,255,255,.65); }
+    .steps { display: flex; flex-direction: column; gap: 24px; max-width: 640px; margin: 0 auto; }
+    .step {
+      display: flex; gap: 20px; align-items: flex-start;
+      background: rgba(255,255,255,.06); border-radius: var(--radius);
+      padding: 24px; border: 1px solid rgba(255,255,255,.08);
+    }
+    .step-num {
+      flex-shrink: 0;
+      width: 40px; height: 40px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 16px; color: white;
+    }
+    .step h3 { font-size: 16px; font-weight: 700; margin-bottom: 6px; color: white; }
+    .step p  { font-size: 14px; color: rgba(255,255,255,.6); }
+
+    /* ── PRIVACY POLICY ── */
+    #privacy { background: white; }
+    .privacy-content {
+      max-width: 760px; margin: 0 auto;
+    }
+    .privacy-content h2 {
+      font-size: 28px; font-weight: 800; margin-bottom: 8px;
+    }
+    .privacy-content .updated {
+      font-size: 13px; color: var(--muted); margin-bottom: 36px;
+    }
+    .privacy-content h3 {
+      font-size: 18px; font-weight: 700;
+      margin: 32px 0 10px;
+      color: var(--primary);
+    }
+    .privacy-content p, .privacy-content li {
+      font-size: 15px; color: #374151; line-height: 1.75;
+    }
+    .privacy-content ul {
+      padding-left: 20px; margin: 8px 0 16px;
+    }
+    .privacy-content li { margin-bottom: 6px; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--text); color: rgba(255,255,255,.5);
+      text-align: center; padding: 32px 24px;
+      font-size: 13px;
+    }
+    footer a { color: rgba(255,255,255,.7); text-decoration: none; }
+    footer a:hover { color: white; }
+    footer .footer-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 16px; }
+
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .hero { padding: 60px 20px 80px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">
+    <div class="icon">🕐</div>
+    MindfulTime
+  </a>
+  <ul class="nav-links">
+    <li><a href="#features">Features</a></li>
+    <li><a href="#how-it-works">How It Works</a></li>
+    <li><a href="#privacy">Privacy</a></li>
+    <li><a href="mailto:sumeetsharma144@gmail.com">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">Digital Wellbeing for iOS</div>
+  <h1>Be Intentional<br>With Your Screen Time</h1>
+  <p>MindfulTime helps you understand your phone habits, set meaningful goals, and reclaim your focus — all without leaving your device.</p>
+  <a class="hero-cta" href="#">
+    <span>Coming Soon to the App Store</span>
+  </a>
+  <p class="hero-sub">Requires iOS 16.0 or later &nbsp;·&nbsp; iPhone</p>
+</section>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="max-w">
+    <div class="centered">
+      <p class="section-label">What You Get</p>
+      <h2 class="section-title">Everything You Need to Use Your Phone Better</h2>
+      <p class="section-subtitle">Built around Apple's Screen Time framework — your data never leaves your device.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon" style="background:#eef2ff;">📊</div>
+        <h3>Usage Dashboard</h3>
+        <p>See a clear breakdown of your daily and weekly screen time, top apps, pickups, and notifications at a glance.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:#f0fdf4;">🎯</div>
+        <h3>App Time Goals</h3>
+        <p>Set daily limits for specific apps. Get warned when you're approaching your limit and notified when you exceed it.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:#faf5ff;">🌙</div>
+        <h3>Focus Modes</h3>
+        <p>Activate built-in sessions like Deep Work, Study Time, or Digital Detox. Distracting apps are shielded for the duration.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:#fff7ed;">🔔</div>
+        <h3>Smart Notifications</h3>
+        <p>Timely reminders that help without nagging — morning check-ins, goal warnings, evening reviews, and snooze support.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:#fef2f2;">🏆</div>
+        <h3>Achievements</h3>
+        <p>Track your streaks, completed focus sessions, and milestones. Progress across Consistency, Focus, and Mindfulness categories.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:#ecfdf5;">💨</div>
+        <h3>Breathing Exercise</h3>
+        <p>A built-in guided box breathing session (4-4-4) to reset your focus whenever you need a moment of calm.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how-it-works" class="how-bg">
+  <div class="max-w centered">
+    <p class="section-label">How It Works</p>
+    <h2 class="section-title">Simple, Private, On-Device</h2>
+    <p class="section-subtitle">MindfulTime uses Apple's Family Controls framework — no account required, no data leaves your phone.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div>
+          <h3>Grant Screen Time Access</h3>
+          <p>On first launch, MindfulTime asks for Screen Time permission using Apple's Family Controls API. This is the only permission needed.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div>
+          <h3>Set Your Goals</h3>
+          <p>Choose which apps you want to limit and set a daily time budget. MindfulTime tracks your progress throughout the day.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div>
+          <h3>Activate Focus When You Need It</h3>
+          <p>Start a Focus Mode session to shield distracting apps using Managed Settings. No VPN, no MDM — it just works.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div>
+          <h3>Review &amp; Improve</h3>
+          <p>Your home dashboard shows daily and weekly trends. Over time, you'll build habits that reduce mindless scrolling.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRIVACY POLICY -->
+<section id="privacy">
+  <div class="privacy-content">
+    <h2>Privacy Policy</h2>
+    <p class="updated">Last updated: March 2026</p>
+
+    <p>MindfulTime ("the app", "we", "our") is committed to protecting your privacy. This policy explains what data the app accesses, how it is used, and how it is protected.</p>
+
+    <h3>1. Data We Access</h3>
+    <p>MindfulTime requests access to Screen Time data via Apple's Family Controls framework. This includes:</p>
+    <ul>
+      <li>Daily and weekly app usage durations</li>
+      <li>App pickup counts and notification counts</li>
+      <li>App and category breakdowns provided by the DeviceActivity framework</li>
+    </ul>
+
+    <h3>2. How Data Is Used</h3>
+    <p>Screen Time data is used exclusively to:</p>
+    <ul>
+      <li>Display your personal usage statistics within the app</li>
+      <li>Track your progress toward self-defined screen time goals</li>
+      <li>Send you optional local notifications about your usage</li>
+      <li>Enable Focus Mode app shielding via Apple's Managed Settings framework</li>
+    </ul>
+
+    <h3>3. Data Storage</h3>
+    <p>All data is stored locally on your device using Apple's on-device APIs (UserDefaults, App Groups, and DeviceActivity). No usage data, personal information, or analytics are transmitted to any external server. MindfulTime has no backend, no user accounts, and no cloud storage.</p>
+
+    <h3>4. Data Sharing</h3>
+    <p>We do not share, sell, or transmit any data to third parties. Your Screen Time data is never sent outside your device.</p>
+
+    <h3>5. Third-Party Services</h3>
+    <p>MindfulTime does not use any third-party analytics, advertising SDKs, or tracking libraries. The app has no in-app purchases, ads, or subscriptions.</p>
+
+    <h3>6. Children's Privacy</h3>
+    <p>MindfulTime is intended for personal use by individuals aged 13 and older. The app does not knowingly collect data from children under 13.</p>
+
+    <h3>7. Your Control</h3>
+    <p>You can revoke Screen Time access at any time via <strong>Settings → Screen Time</strong> on your iPhone. You can also reset all app data from the Profile tab within the app, which clears all locally stored goals, focus modes, and preferences.</p>
+
+    <h3>8. Changes to This Policy</h3>
+    <p>If this privacy policy changes, the updated version will be posted on this page with a revised date. Continued use of the app after changes constitutes acceptance of the updated policy.</p>
+
+    <h3>9. Contact</h3>
+    <p>If you have any questions about this privacy policy, please contact us at:<br>
+    <a href="mailto:sumeetsharma144@gmail.com" style="color: var(--primary);">sumeetsharma144@gmail.com</a></p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-links">
+    <a href="#features">Features</a>
+    <a href="#how-it-works">How It Works</a>
+    <a href="#privacy">Privacy Policy</a>
+    <a href="mailto:sumeetsharma144@gmail.com">Contact</a>
+  </div>
+  <p>© 2026 MindfulTime. Built with ♥ for a more intentional digital life.</p>
+</footer>
+
+</body>
+</html>
