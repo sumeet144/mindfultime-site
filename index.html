@@ -184,6 +184,52 @@
     }
     .privacy-content li { margin-bottom: 6px; }
 
+    /* ── COMPARISON ── */
+    #why { background: var(--card); }
+    .compare-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .compare {
+      width: 100%; min-width: 480px;
+      border-collapse: separate; border-spacing: 0;
+      background: var(--card); border-radius: var(--radius); overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,.05); border: 1px solid rgba(0,0,0,.04);
+    }
+    .compare th, .compare td {
+      padding: 16px 18px; text-align: left; font-size: 14px;
+      vertical-align: top; border-bottom: 1px solid rgba(0,0,0,.06);
+    }
+    .compare tr:last-child th, .compare tr:last-child td { border-bottom: none; }
+    .compare thead th { font-size: 13px; font-weight: 700; }
+    .compare thead .col-mt {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: #fff;
+    }
+    .compare thead .col-ios { color: var(--muted); }
+    .compare .row-label { font-weight: 600; color: var(--text); width: 34%; }
+    .compare .cell-mt { background: rgba(69,106,247,.05); color: var(--text); font-weight: 500; }
+    .compare .cell-ios { color: var(--muted); }
+
+    /* ── FAQ ── */
+    #faq { background: var(--card); }
+    .faq-list { max-width: 760px; margin: 0 auto; }
+    .faq-item {
+      background: var(--bg); border: 1px solid rgba(0,0,0,.06);
+      border-radius: var(--radius); margin-bottom: 12px; overflow: hidden;
+    }
+    .faq-item summary {
+      cursor: pointer; list-style: none;
+      padding: 20px 24px; font-size: 16px; font-weight: 600; color: var(--text);
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary::after {
+      content: "+"; color: var(--primary); font-size: 24px; font-weight: 400;
+      line-height: 1; flex-shrink: 0; transition: transform .2s;
+    }
+    .faq-item[open] summary::after { transform: rotate(45deg); }
+    .faq-item .faq-body {
+      padding: 0 24px 20px; font-size: 15px; color: var(--muted); line-height: 1.7;
+    }
+
     /* ── FOOTER ── */
     footer {
       background: var(--text); color: rgba(255,255,255,.5);
@@ -210,7 +256,9 @@
   </a>
   <ul class="nav-links">
     <li><a href="#features">Features</a></li>
+    <li><a href="#why">Why MindfulTime</a></li>
     <li><a href="#how-it-works">How It Works</a></li>
+    <li><a href="#faq">FAQ</a></li>
     <li><a href="#privacy">Privacy</a></li>
     <li><a href="#support">Support</a></li>
   </ul>
@@ -270,6 +318,65 @@
   </div>
 </section>
 
+<!-- WHY MINDFULTIME -->
+<section id="why">
+  <div class="max-w">
+    <div class="centered">
+      <p class="section-label">Why MindfulTime</p>
+      <h2 class="section-title">More Than a Screen Time Report</h2>
+      <p class="section-subtitle">iOS Screen Time tells you how much you used. MindfulTime helps you do something about it.</p>
+    </div>
+    <div class="compare-wrap">
+      <table class="compare">
+        <thead>
+          <tr>
+            <th class="col-feature"></th>
+            <th class="col-mt">MindfulTime</th>
+            <th class="col-ios">iOS Screen Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="row-label">What counts as “screen time”</td>
+            <td class="cell-mt">You choose the apps &amp; categories that matter — leave out calls &amp; texts</td>
+            <td class="cell-ios">One all-inclusive total for everything</td>
+          </tr>
+          <tr>
+            <td class="row-label">Weekday / weekend / evening schedules</td>
+            <td class="cell-mt">Built into every goal, in a couple of taps</td>
+            <td class="cell-ios">Possible, but takes extra steps</td>
+          </tr>
+          <tr>
+            <td class="row-label">As you approach a limit</td>
+            <td class="cell-mt">Smart, encouraging nudges throughout the day</td>
+            <td class="cell-ios">Mostly silent until a hard cutoff</td>
+          </tr>
+          <tr>
+            <td class="row-label">Goal modes</td>
+            <td class="cell-mt">Mindful (gentle accountability) or Committed (blocks apps)</td>
+            <td class="cell-ios">App limits only</td>
+          </tr>
+          <tr>
+            <td class="row-label">Home screen</td>
+            <td class="cell-mt">Live dashboard: goal progress, pickups, screen-free time, trends</td>
+            <td class="cell-ios">A static weekly report</td>
+          </tr>
+          <tr>
+            <td class="row-label">Staying motivated</td>
+            <td class="cell-mt">Daily streaks &amp; achievement badges</td>
+            <td class="cell-ios">None</td>
+          </tr>
+          <tr>
+            <td class="row-label">Privacy</td>
+            <td class="cell-mt">On-device, never collected or sold</td>
+            <td class="cell-ios">On-device</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
 <!-- HOW IT WORKS -->
 <section id="how-it-works" class="how-bg">
   <div class="max-w centered">
@@ -305,6 +412,43 @@
           <p>Your home dashboard shows daily and weekly trends. Over time, you'll build habits that reduce mindless scrolling.</p>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="max-w">
+    <div class="centered">
+      <p class="section-label">FAQ</p>
+      <h2 class="section-title">Questions, Answered</h2>
+      <p class="section-subtitle">The things prospective users ask us most.</p>
+    </div>
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary>How is MindfulTime different from iOS Screen Time?</summary>
+        <div class="faq-body">iOS Screen Time shows you how much you used; MindfulTime helps you change it. You set personalized goals around the apps that actually matter — not calls and texts — with flexible weekday, weekend, and evening schedules and smart nudges that keep you on track. Choose <strong>Mindful</strong> mode for gentle accountability or <strong>Committed</strong> mode to block apps when you mean business, and stay motivated with streaks and achievements along the way. (See the comparison above for a side-by-side.)</div>
+      </details>
+      <details class="faq-item">
+        <summary>Is my data private?</summary>
+        <div class="faq-body">Yes. Everything stays on your device. MindfulTime has no account, no servers, and no third-party analytics or tracking — your Screen Time data is never uploaded, shared, or sold. It's built entirely on Apple's on-device frameworks.</div>
+      </details>
+      <details class="faq-item">
+        <summary>Does it cost anything? Are there ads?</summary>
+        <div class="faq-body">No ads, no tracking, no subscriptions, and no in-app purchases.</div>
+      </details>
+      <details class="faq-item">
+        <summary>Does MindfulTime block apps?</summary>
+        <div class="faq-body">Only if you want it to. Set a goal to <strong>Committed</strong> mode and the apps you choose are restricted once you hit your limit. You can also start a Focus Mode session — like Deep Work or Digital Detox — to shield distracting apps for its duration. Blocking uses Apple's Managed Settings (no VPN, no MDM). Prefer awareness over restriction? Use <strong>Mindful</strong> mode and nothing is blocked.</div>
+      </details>
+      <details class="faq-item">
+        <summary>What do I need to use it?</summary>
+        <div class="faq-body">An iPhone running iOS 16 or later, and Screen Time permission — granted on first launch via Apple's Family Controls. No account or sign-up required.</div>
+      </details>
+      <details class="faq-item">
+        <summary>Does it replace iOS Screen Time?</summary>
+        <div class="faq-body">No — it complements it. MindfulTime is built on Apple's Screen Time framework and layers personalized goals, schedules, nudges, and motivation on top. You can keep using Apple's built-in limits alongside it.</div>
+      </details>
     </div>
   </div>
 </section>
@@ -374,7 +518,9 @@
 <footer>
   <div class="footer-links">
     <a href="#features">Features</a>
+    <a href="#why">Why MindfulTime</a>
     <a href="#how-it-works">How It Works</a>
+    <a href="#faq">FAQ</a>
     <a href="#privacy">Privacy Policy</a>
     <a href="#support">Support</a>
   </div>
