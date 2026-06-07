@@ -94,6 +94,10 @@
       transition: transform .2s, box-shadow .2s;
     }
     .hero-cta:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(69,106,247,.45); }
+    /* Official Apple "Download on the App Store" badge (unaltered artwork) */
+    .app-store-badge { display: inline-block; transition: transform .2s, filter .2s; }
+    .app-store-badge img { display: block; height: 56px; width: auto; }
+    .app-store-badge:hover { transform: translateY(-2px); filter: drop-shadow(0 8px 20px rgba(0,0,0,.22)); }
     .hero-sub {
       margin-top: 16px; font-size: 13px; color: var(--muted);
     }
@@ -286,8 +290,8 @@
   <div class="hero-badge">Digital Wellbeing for iOS</div>
   <h1>Be Intentional<br>With Your Screen Time</h1>
   <p>MindfulTime helps you understand your phone habits, set meaningful goals, and reclaim your focus — all without leaving your device.</p>
-  <a class="hero-cta" href="https://apps.apple.com/app/mindfultime-focus-goals/id6760975840" target="_blank" rel="noopener">
-    <span>Download on the App Store</span>
+  <a class="app-store-badge" href="https://apps.apple.com/app/mindfultime-focus-goals/id6760975840" target="_blank" rel="noopener" aria-label="Download MindfulTime on the App Store">
+    <img src="assets/app-store-badge.svg" alt="Download on the App Store" width="168" height="56" />
   </a>
   <p class="hero-sub">Requires iOS 16.0 or later &nbsp;·&nbsp; iPhone</p>
 </section>
