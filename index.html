@@ -64,6 +64,7 @@
     .hero::before {
       content: "";
       position: absolute; inset: 0;
+      pointer-events: none;   /* decorative overlay must not intercept clicks (e.g. the App Store badge) */
       background: radial-gradient(ellipse at 20% 50%, rgba(69,106,247,.08) 0%, transparent 60%),
                   radial-gradient(ellipse at 80% 20%, rgba(140,89,245,.07) 0%, transparent 60%);
     }
