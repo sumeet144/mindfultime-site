@@ -75,6 +75,8 @@
       padding: 6px 14px; border-radius: 100px; margin-bottom: 20px;
       text-transform: uppercase;
     }
+    /* Keep "iOS" in correct Apple casing despite the badge's uppercase transform */
+    .hero-badge .ios { text-transform: none; }
     .hero h1 {
       font-size: clamp(36px, 6vw, 60px);
       font-weight: 800; line-height: 1.1;
@@ -279,7 +281,7 @@
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-badge">Digital Wellbeing for iOS</div>
+  <div class="hero-badge">Digital Wellbeing for <span class="ios">iOS</span></div>
   <h1>Be Intentional<br>With Your Screen Time</h1>
   <p>MindfulTime helps you understand your phone habits, set meaningful goals, and reclaim your focus — all without leaving your device.</p>
   <a class="app-store-badge" href="https://apps.apple.com/app/mindfultime-focus-goals/id6760975840" target="_blank" rel="noopener" aria-label="Download MindfulTime on the App Store">
