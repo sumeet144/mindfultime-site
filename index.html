@@ -92,9 +92,16 @@
     .app-store-badge { display: inline-block; transition: transform .2s, filter .2s; }
     .app-store-badge img { display: block; height: 56px; width: auto; }
     .app-store-badge:hover { transform: translateY(-2px); filter: drop-shadow(0 8px 20px rgba(0,0,0,.22)); }
+    .store-badges { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 16px; }
+    /* Official Google Play badge (unaltered artwork). The PNG has built-in
+       transparent padding, so it's drawn taller and the padding is pulled in
+       with negative margins to match the App Store badge's 56px height. */
+    .google-play-badge img { height: 83px; margin: -13.5px -13px; }
+    .google-play-badge:hover { filter: drop-shadow(0 8px 20px rgba(0,0,0,.22)); }
     .hero-sub {
       margin-top: 16px; font-size: 13px; color: var(--muted);
     }
+    .hero-sub .nowrap { white-space: nowrap; }
 
     /* ── SECTION COMMON ── */
     section { padding: 80px 24px; }
@@ -281,13 +288,18 @@
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-badge">Digital Wellbeing for <span class="ios">iOS</span></div>
+  <div class="hero-badge">Digital Wellbeing for <span class="ios">iOS</span> &amp; Android</div>
   <h1>Be Intentional<br>With Your Screen Time</h1>
   <p>MindfulTime helps you understand your phone habits, set meaningful goals, and reclaim your focus — all without leaving your device.</p>
-  <a class="app-store-badge" href="https://apps.apple.com/app/mindfultime-focus-goals/id6760975840" target="_blank" rel="noopener" aria-label="Download MindfulTime on the App Store">
-    <img src="assets/app-store-badge.svg" alt="Download on the App Store" width="168" height="56" />
-  </a>
-  <p class="hero-sub">Requires iOS 16.0 or later &nbsp;·&nbsp; iPhone</p>
+  <div class="store-badges">
+    <a class="app-store-badge" href="https://apps.apple.com/app/mindfultime-focus-goals/id6760975840" target="_blank" rel="noopener" aria-label="Download MindfulTime on the App Store">
+      <img src="assets/app-store-badge.svg" alt="Download on the App Store" width="168" height="56" />
+    </a>
+    <a class="app-store-badge google-play-badge" href="https://play.google.com/store/apps/details?id=com.artificialhumanfactory.mindfultime" target="_blank" rel="noopener" aria-label="Get MindfulTime on Google Play">
+      <img src="assets/google-play-badge.png" alt="Get it on Google Play" width="215" height="83" />
+    </a>
+  </div>
+  <p class="hero-sub"><span class="nowrap">iPhone with iOS 16.0 or later</span> &nbsp;·&nbsp; <span class="nowrap">Android 8.0 or later</span></p>
 </section>
 
 <!-- SCREENSHOTS -->
@@ -462,7 +474,7 @@
       </details>
       <details class="faq-item">
         <summary>Is my data private?</summary>
-        <div class="faq-body">Yes. Everything stays on your device. MindfulTime has no account, no servers, and no third-party analytics or tracking — your Screen Time data is never uploaded, shared, or sold. It's built entirely on Apple's on-device frameworks.</div>
+        <div class="faq-body">Yes. Everything stays on your device. MindfulTime has no account, no servers, and no third-party analytics or tracking — your Screen Time data is never uploaded, shared, or sold. On iPhone it's built entirely on Apple's on-device frameworks; on Android it reads usage from Android's own on-device statistics.</div>
       </details>
       <details class="faq-item">
         <summary>Does it cost anything? Are there ads?</summary>
@@ -470,11 +482,11 @@
       </details>
       <details class="faq-item">
         <summary>Does MindfulTime block apps?</summary>
-        <div class="faq-body">Only if you want it to. Set a goal to <strong>Committed</strong> mode and the apps you choose are restricted once you hit your limit. You can also start a Focus Mode session — like Deep Work or Digital Detox — to shield distracting apps for its duration. Blocking uses Apple's Managed Settings (no VPN, no MDM). Prefer awareness over restriction? Use <strong>Mindful</strong> mode and nothing is blocked.</div>
+        <div class="faq-body">Only if you want it to. Set a goal to <strong>Committed</strong> mode and the apps you choose are restricted once you hit your limit. You can also start a Focus Mode session — like Deep Work or Digital Detox — to shield distracting apps for its duration. On iPhone, blocking uses Apple's Managed Settings; on Android, an Accessibility service shows the block screen (no VPN or MDM on either). Prefer awareness over restriction? Use <strong>Mindful</strong> mode and nothing is blocked.</div>
       </details>
       <details class="faq-item">
         <summary>What do I need to use it?</summary>
-        <div class="faq-body">An iPhone running iOS 16 or later, and Screen Time permission — granted on first launch via Apple's Family Controls. No account or sign-up required.</div>
+        <div class="faq-body">On iPhone: iOS 16 or later, and Screen Time permission — granted on first launch via Apple's Family Controls. On Android: Android 8.0 or later, with Usage access and Accessibility turned on during setup — the app walks you through both. No account or sign-up required on either.</div>
       </details>
       <details class="faq-item">
         <summary>Does it replace iOS Screen Time?</summary>
